@@ -10,25 +10,25 @@ jobs:
       - run:
           name: Jekyll
           command: jekyll build
-      - run:
-          name: Log version.txt
-          command: echo "Built with jekyll from $(git rev-parse --short HEAD) of prolike/prolike.io" > _site/version.txt
-      - save_cache:
-          key: the-site-{{ .Revision }}
-          paths:
-            - _site
+      #- run:
+      #    name: Log version.txt
+      #    command: echo "Built with jekyll from $(git rev-parse --short HEAD) of prolike/prolike.io" > _site/version.txt
+      #- save_cache:
+      #    key: the-site-{{ .Revision }}
+      #    paths:
+      #      - _site
 
-  test:
-    working_directory: /app
-    docker:
-      - image: 18fgsa/html-proofer
-    steps:
-      - restore_cache:
-          keys:
-            - the-site-{{ .Revision }}
-      - run:
-          name: Htmlproofer
-          command: htmlproofer --disable-external --allow-hash-href --checks-to-ignore ImageCheck --check-favicon _site
+  #test:
+    #working_directory: /app
+    #docker:
+      #- image: 18fgsa/html-proofer
+    #steps:
+      #- restore_cache:
+          #keys:
+            #- the-site-{{ .Revision }}
+      #- run:
+          #name: Htmlproofer
+          #command: htmlproofer --disable-external --allow-hash-href --checks-to-ignore ImageCheck --check-favicon _site
 
   stage:
     working_directory: /app/_site
@@ -66,13 +66,13 @@ workflows:
   build_and_test:
     jobs:
       - build
-      - test:
-          requires:
-            - build
+      #- test:
+          #requires:
+            #- build
       - stage:
           requires:
             - build
-            - test
+            #- test
           filters:
             branches:
               only: master
