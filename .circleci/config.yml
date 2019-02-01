@@ -51,7 +51,7 @@ jobs:
           command: git init
       - run:
           name: Set remote
-          command: git remote add stage https://$(printenv GHTOKEN_PROLIKE)github.com/prolike/prod.web-lab.prolike.io
+          command: git remote add stage git@github.com:prolike/prod.web-lab.prolike.io.git
       - run:
           command: git add -A .
       #- run:
