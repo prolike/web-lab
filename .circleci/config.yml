@@ -12,7 +12,7 @@ jobs:
           command: jekyll build
       - run:
           name: Log version.txt
-          command: echo "Built with jekyll from $(git rev-parse --short HEAD) of prolike/prolike.io" > _site/version.txt
+          command: echo "Built with jekyll from $(git rev-parse --short HEAD) of prolike/prolike.io" > version.txt
       - save_cache:
           key: the-site-{{ .Revision }}
           paths:
