@@ -51,7 +51,7 @@ jobs:
           command: git init
       - run:
           name: Set remote
-          command: git remote add stage hgit push "https://${GHTOKEN_PROLIKE}@${prod.web-lab.prolike.io}" master > /dev/null 2>&1
+          command: git remote add stage hgit push "https://${GHTOKEN_PROLIKE}@github.com/prolike/prod.web-lab.prolike.io
       - run:
           command: git add -A .
       - run:
