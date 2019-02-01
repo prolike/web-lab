@@ -54,9 +54,9 @@ jobs:
           command: git remote add stage https://$(printenv GHTOKEN_PROLIKE)@github.com/prolike/prod.web-lab.prolike.io
       - run:
           command: git add -A .
-      - run:
-          name: Git commit
-          command: git commit -F version.txt
+      #- run:
+          #name: Git commit
+          #command: git commit -F version.txt
       - run:
           name: Git push
           command: git push -f stage master
