@@ -10,13 +10,13 @@ jobs:
       - run:
           name: Jekyll
           command: jekyll build
-      #- run:
-      #    name: Log version.txt
-      #    command: echo "Built with jekyll from $(git rev-parse --short HEAD) of prolike/prolike.io" > _site/version.txt
-      #- save_cache:
-      #    key: the-site-{{ .Revision }}
-      #    paths:
-      #      - _site
+      - run:
+          name: Log version.txt
+          command: echo "Built with jekyll from $(git rev-parse --short HEAD) of prolike/prolike.io" > _site/version.txt
+      - save_cache:
+          key: the-site-{{ .Revision }}
+          paths:
+            - /app
 
   #test:
     #working_directory: /app
@@ -56,7 +56,7 @@ jobs:
           command: git add -A .
       - run:
           name: Git commit
-          command: git commit #-F version.txt
+          command: git commit -F version.txt
       - run:
           name: Git push
           command: git push -f stage master
