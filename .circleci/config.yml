@@ -31,7 +31,7 @@ jobs:
           #command: htmlproofer --disable-external --allow-hash-href --checks-to-ignore ImageCheck --check-favicon _site
 
   stage:
-    working_directory: /app/_site
+    working_directory: /app
     docker:
       - image: lakruzz/jekyll-plus:1.0.1
     steps:
