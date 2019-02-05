@@ -104,11 +104,12 @@ workflows:
       - stage:
           requires:
             - build
+            #- test
       - prod:
           requires:
             - build
-            - stage
             #- test
+            - stage
           filters:
             branches:
               only: master
