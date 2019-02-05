@@ -110,5 +110,7 @@ workflows:
             - stage
             #- test
           filters:
+            tags:
+              only: donedone
             branches:
               only: master
