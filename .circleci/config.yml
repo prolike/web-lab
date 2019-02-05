@@ -102,7 +102,7 @@ workflows:
           #requires:
             #- build
       - prod:
-        requires:
+          requires:
             - build
       - stage:
           requires:
