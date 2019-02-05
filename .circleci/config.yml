@@ -101,13 +101,13 @@ workflows:
       #- test:
           #requires:
             #- build
-      - prod:
-          requires:
-            - build
       - stage:
           requires:
             - build
-            - prod
+      - prod:
+          requires:
+            - build
+            - stage
             #- test
           filters:
             branches:
