@@ -109,8 +109,8 @@ workflows:
             - build
             - stage
             #- test
+          when: manual
           filters:
-            tags:
-              only: donedone
+            
             branches:
               only: master
