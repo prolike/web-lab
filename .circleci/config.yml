@@ -101,11 +101,9 @@ workflows:
       #- test:
           #requires:
             #- build
-
-    - prod:
+      - prod:
         requires:
             - build
-
       - stage:
           requires:
             - build
