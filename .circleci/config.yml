@@ -61,6 +61,38 @@ jobs:
           name: Git push
           command: git push -f stage master
 
+
+  prod:
+    working_directory: /app
+    docker:
+      - image: lakruzz/jekyll-plus:1.0.1
+    steps:
+      - restore_cache:
+          keys:
+            - the-site-{{ .Revision }}
+      - run:
+          name: Set git user.name
+          command: git config --global user.name "Circle CI by @prolike"
+      - run:
+          name: Set git user.email
+          command: git config --global user.email "github@prolike.io"
+      - run:
+          name: Set git push.default
+          command: git config --global push.default simple
+      - run:
+          command: git init
+      - run:
+          name: Set remote
+          command: git remote add stage https://$(printenv GHTOKEN_PROLIKE)@github.com/prolike/prod.web-lab.prolike.io.git
+      - run:
+          command: git add -A .
+      - run:
+          name: Git commit
+          command: git commit -F version.txt
+      - run:
+          name: Git push
+          command: git push -f stage master
+
 workflows:
   version: 2
   build_and_test:
@@ -69,9 +101,15 @@ workflows:
       #- test:
           #requires:
             #- build
+
+    - prod:
+        requires:
+            - build
+
       - stage:
           requires:
             - build
+            - prod
             #- test
           filters:
             branches:
