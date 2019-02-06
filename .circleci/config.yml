@@ -118,4 +118,4 @@ workflows:
               ignore: /.*/
             tags:
               only:
-                - /^\d+\.\d+\.\d+(?:\.\C{1,30})?$/ # Semantic version number (semver.org), followed by optional .(dot)+string https://regex101.com/r/0h0zLr/1
+                - "^\d+\.\d+\.\d+(?:\.\C{1,30})?$" # Semantic version number (semver.org), followed by optional .(dot)+string https://regex101.com/r/0h0zLr/1
