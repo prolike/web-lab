@@ -13,8 +13,6 @@ jobs:
       - run:
           name: Log version.txt
           command: echo "Built with jekyll from $(git rev-parse --short HEAD) of prolike/prolike.io" > _site/version.txt
-      - run:
-          command: ls
       - save_cache:
           key: the-site-{{ .Revision }}
           paths:
@@ -33,15 +31,13 @@ jobs:
           command: htmlproofer --disable-external --allow-hash-href --checks-to-ignore ImageCheck .
 
   stage:
-    working_directory: /app
+    working_directory: /app/_site
     docker:
       - image: lakruzz/jekyll-plus:1.0.1
     steps:
       - restore_cache:
           keys:
             - the-site-{{ .Revision }}
-      - run:
-          command: ls
       - run:
           name: Set git user.name
           command: git config --global user.name "Circle CI by @prolike"
@@ -67,7 +63,7 @@ jobs:
 
 
   prod:
-    working_directory: /app
+    working_directory: /app/_site
     docker:
       - image: lakruzz/jekyll-plus:1.0.1
     steps:
