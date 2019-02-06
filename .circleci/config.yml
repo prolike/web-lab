@@ -28,7 +28,7 @@ jobs:
             - the-site-{{ .Revision }}
       - run:
           name: Htmlproofer
-          command: htmlproofer --disable-external --allow-hash-href --checks-to-ignore ImageCheck --check-favicon .
+          command: htmlproofer --disable-external --allow-hash-href --checks-to-ignore ImageCheck .
 
   stage:
     working_directory: /app
