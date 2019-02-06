@@ -12,23 +12,23 @@ jobs:
           command: jekyll build
       - run:
           name: Log version.txt
-          command: echo "Built with jekyll from $(git rev-parse --short HEAD) of prolike/prolike.io" > version.txt
+          command: echo "Built with jekyll from $(git rev-parse --short HEAD) of prolike/prolike.io" > _site/version.txt
       - save_cache:
           key: the-site-{{ .Revision }}
           paths:
-            - /app
+            - _site
 
-  #test:
-    #working_directory: /app
-    #docker:
-      #- image: 18fgsa/html-proofer
-    #steps:
-      #- restore_cache:
-          #keys:
-            #- the-site-{{ .Revision }}
-      #- run:
-          #name: Htmlproofer
-          #command: htmlproofer --disable-external --allow-hash-href --checks-to-ignore ImageCheck --check-favicon _site
+  test:
+    working_directory: /app
+    docker:
+      - image: 18fgsa/html-proofer
+    steps:
+      - restore_cache:
+          keys:
+            - the-site-{{ .Revision }}
+      - run:
+          name: Htmlproofer
+          command: htmlproofer --disable-external --allow-hash-href --checks-to-ignore ImageCheck --check-favicon .
 
   stage:
     working_directory: /app
@@ -83,7 +83,7 @@ jobs:
           command: git init
       - run:
           name: Set remote
-          command: git remote add stage https://$(printenv GHTOKEN_PROLIKE)@github.com/prolike/prod.web-lab.prolike.io.git
+          command: git remote add production https://$(printenv GHTOKEN_PROLIKE)@github.com/prolike/prod.web-lab.prolike.io.git
       - run:
           command: git add -A .
       - run:
@@ -91,31 +91,29 @@ jobs:
           command: git commit -F version.txt
       - run:
           name: Git push
-          command: git push -f stage master
+          command: git push -f production master
 
 workflows:
   version: 2
   build_and_test:
     jobs:
       - build
-      #- test:
-          #requires:
-            #- build
+      - test:
+          requires:
+            - build
       - stage:
           requires:
             - build
-            #- test
+            - test
           filters:
             branches:
               only: master
       - prod:
           requires:
             - build
-            #- test
+            - test
             - stage
           filters:
-            branches:
-              ignore: /.*/
             tags:
               only:
                 - '\d+\.\d+\.\d+(?:\.\C{1,30})?$' # Semantic version number (semver.org), followed by optional .(dot)+string https://regex101.com/r/0h0zLr/1
