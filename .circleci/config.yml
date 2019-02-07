@@ -101,9 +101,19 @@ workflows:
   build_and_test:
     jobs:
       - build
+          filters:
+            tags:
+              only: /.*/
+            branches:
+              only: /.*/
       - test:
           requires:
             - build
+          filters:
+            tags:
+              only: /.*/
+            branches:
+              only: /.*/
       - stage:
           requires:
             - build
