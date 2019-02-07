@@ -19,7 +19,7 @@ jobs:
             - _site
 
   test:
-    working_directory: /app
+    working_directory: /app/_site
     docker:
       - image: 18fgsa/html-proofer
     steps:
