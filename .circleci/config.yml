@@ -18,6 +18,38 @@ jobs:
           paths:
             - _site
 
+  integrate:
+    docker:
+      - image: circleci/node:8.10
+    steps:
+      - checkout
+      - run:
+          name: Environment
+          command: |
+            git --version
+            env | sort | grep "CIRCLE"
+      - run:
+          name: Intro
+          command: ./play --manuscript .circleci/manuscript.yml --part gitintro
+      - run:
+          name: Swap to target branch and test integration
+          command: ./play --manuscript .circleci/manuscript.yml --part integrate
+
+  deliver:
+    docker:
+      - image: circleci/node:8.10
+    steps:
+      - checkout
+      - run:
+          name: Intro
+          command: ./play --manuscript .circleci/manuscript.yml --part gitintro
+      - run:
+          name: integrate
+          command: ./play --manuscript .circleci/manuscript.yml --part integrate
+      - run:
+          name: Deliver
+          command: ./play --manuscript .circleci/manuscript.yml --part deliver
+
   test:
     working_directory: /app/_site
     docker:
@@ -100,6 +132,10 @@ workflows:
   version: 2
   build_and_test:
     jobs:
+      - integrate:
+          filters:
+            branches:
+              only: /ready\/.+/ 
       - build:
           filters:
             tags:
@@ -114,6 +150,14 @@ workflows:
               only: /.*/
             branches:
               only: /.*/
+      - deliver:
+          requires:
+            - build
+            - test
+          filters:
+            branches:
+              only:
+                - /ready\/.+/ 
       - stage:
           requires:
             - build
