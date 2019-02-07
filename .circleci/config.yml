@@ -39,6 +39,9 @@ jobs:
           keys:
             - the-site-{{ .Revision }}
       - run:
+          name: Use CNAME.stage
+          command: cp -f CNAME.stage CNAME      
+      - run:
           name: Set git user.name
           command: git config --global user.name "Circle CI by @prolike"
       - run:
@@ -114,6 +117,7 @@ workflows:
             - test
             - stage
           filters:
+            branches:
+              ignore: /.*/
             tags:
-              only:
-                - '\d+\.\d+\.\d+(?:\.\C{1,30})?$' # Semantic version number (semver.org), followed by optional .(dot)+string https://regex101.com/r/0h0zLr/1
+              only: /\d+\.\d+\.\d+(?:\.\C{1,30})?$/ # Semantic version number (semver.org), followed by optional .(dot)+string https://regex101.com/r/0h0zLr/1
