@@ -115,7 +115,6 @@ workflows:
           requires:
             - build
             - test
-            - stage
           filters:
             branches:
               ignore: /.*/
