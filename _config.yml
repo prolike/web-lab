@@ -58,6 +58,28 @@ defaults:
     values:
       layout: page
 
+prose:
+  rooturl: '_pages'
+  siteurl: ''
+  relativeLinks: ''
+  media: 'media'
+  ignore:
+    - index.html
+    - _config.yml
+    - /_layouts
+    - /_includes
+  metadata:
+    _pages:
+      - name: "tags"
+        field:
+          element: "multiselect"
+          label: "Add Tags"
+          placeholder: "Choose Tags"
+          options:
+            - name: "Apples"
+              value: "apples"
+            - name: "Bananas"
+              value: "bananas"
 
 responsive_image:
   # [Required]
