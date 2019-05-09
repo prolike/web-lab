@@ -40,6 +40,9 @@ collections:
   pages:
     output: true
     permalink: /:path/
+  posts:
+    output: true
+    permalink: /posts/:title/
 
 defaults:
   -
@@ -59,7 +62,7 @@ defaults:
       layout: page
 
 prose:
-  rooturl: '_pages'
+  rooturl: '_posts'
   siteurl: ''
   relativeLinks: ''
   media: 'media'
@@ -69,7 +72,7 @@ prose:
     - /_layouts
     - /_includes
   metadata:
-    _pages:
+    _posts:
       - name: "tags"
         field:
           element: "multiselect"
