@@ -1,37 +1,37 @@
-name: Lakruzz - Personal blog by Lars Kruse
-title: Lakruzz - Personal blog by Lars Kruse
-author: lakruzz
-url: http://www.lakruzz.com
-twitter:
-  username: lakruzz
-social:
-  name: Lars Kruse
-  links:
-    - https://twitter.com/lakruzz
-    - https://github.com/lakruzz
-    - https://www.linkedin.com/in/lakruzz
-
-image: /images/authors/lakruzz.png
+# Site settings
+title:
+email: info@wteam.dk
+description: > # this means to ignore newlines until "baseurl:"
+  Write an awesome description for your new site here. You can edit this
+  line in _config.yml. It will appear in your document head meta (for
+  Google search results) and in your feed.xml site description.
+baseurl: "" # the subpath of your site, e.g. /blog/
+url: "" # the base hostname & protocol for your site
 
 sass:
   style: compressed
 
-highlighter: rouge
-exclude:
-  - "*README.md"
-  - bower_components
-  - node_modules
-  - gulpfile.js
-  - LICENSE
-  - package.json
-  - package-lock.json
-timezone: Europe/Copenhagen
+# User setting
+owner:
+email: info@wteam.dk
+facebook_username:
+twitter_username:
+github_username:
+address:
+  - line:
+  - line:
+  # Feel free to add more lines here
+telephone:
+copyright:
+
+# API settings
+google_api_key:
+
+# Build settings
 markdown: kramdown
-permalink: /:categories/:title/
+
 plugins:
   - jekyll-responsive-image
-  - jekyll-seo-tag
-  - jekyll-feed
 
 collections:
   blueprints:
