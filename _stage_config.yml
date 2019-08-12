@@ -3,7 +3,7 @@ description: VI TILBYDER ÅBNE UDDANNELSER, LEDERUDDANNELSER, KONSULENTYDELSER, 
 author: Prolike
 paginate: 24
 paginate_path: "/stories/page:num/"
-side-addresse: https://www.copenhagencoaching.dk
+side-addresse: https://stage.copenhagencoaching.dk
 
 sass:
   style: compressed
@@ -55,7 +55,7 @@ defaults:
 
 prose:
   rooturl: ''
-  siteurl: 'https://www.copenhagencoaching.dk'
+  siteurl: 'https://stage.copenhagencoaching.dk'
   relativeLinks: ''
   media: 'media'
   ignore:

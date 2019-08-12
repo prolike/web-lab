@@ -7,9 +7,12 @@ jobs:
       - image: lakruzz/jekyll-plus:1.0.1
     steps:
       - checkout
-      - run:
-          name: Jekyll
-          command: jekyll build
+      - run: 
+          name: Build Jekyll
+          command: |
+            export JEKYLL_PARAMS=`printenv CIRCLE_BRANCH | grep -e "^master$" && echo "--config _stage_config.yml" || echo ""`
+            printenv JEKYLL_PARAMS
+            jekyll build $JEKYLL_PARAMS     
       - run:
           name: Log version.txt
           command: echo "Built with jekyll from $(git rev-parse --short HEAD) of prolike/prolike.io" > _site/version.txt
