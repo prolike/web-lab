@@ -55,7 +55,7 @@ defaults:
 
 prose:
   rooturl: ''
-  siteurl: 'https://stage.copenhagencoaching.dk'
+  siteurl: 'https://www.copenhagencoaching.dk'
   relativeLinks: ''
   media: 'media'
   ignore:
